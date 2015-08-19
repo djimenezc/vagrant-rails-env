@@ -15,6 +15,9 @@ Vagrant.configure('2') do |config|
   config.vm.network :forwarded_port, guest: 5432, host: 5432 # forward the PostgreSQL port
 
   config.vm.provision :shell, path: 'bootstrap.sh'
+  # config.vm.provision "shell" do |s|
+  #   s.path = "provision/setup.sh"
+  # end
 
   config.omnibus.chef_version = :latest
   # config.vm.provision :shell, :inline => 'gem install chef --version latest --verbose'
@@ -36,11 +39,16 @@ Vagrant.configure('2') do |config|
             }
         },
         'rbenv' => {
-            'global' => '2.0.0-p247',
-            'rubies' => ['2.0.0-p247'],
+            'global' => '2.1.5',
+            'rubies' => %w(2.1.5),
             'gems' => {
-                '2.0.0-p247' => [
-                    {'name' => 'bundler'}
+                # '2.0.0-p247' => [
+                #     {'name' => 'bundler'},
+                #     {'name' => 'rake', 'options' => {'force' => true}}
+                # ],
+                '2.1.5' => [
+                    {'name' => 'bundler'},
+                    {'name' => 'rake'}
                 ]
             }
         }

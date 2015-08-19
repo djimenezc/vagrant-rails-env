@@ -3,6 +3,7 @@
 # 1. Setup MySQL and PostgreSQL
 # 2. Create a rails user with a blank password with full control
 
+
 # MySQL
 mysql_connection_info = {
     :host     => "localhost",
@@ -10,25 +11,25 @@ mysql_connection_info = {
     :password => node['mysql']['server_root_password']
 }
 
-# 'rails'@'localhost'
-mysql_database_user 'rails' do
-  connection mysql_connection_info
-  password ''
-  host 'localhost'
-  privileges ["ALL PRIVILEGES"]
-  grant_option true
-  action :grant
-end
-
-# 'rails'@'%'
-mysql_database_user 'rails' do
-  connection mysql_connection_info
-  password ''
-  host '%'
-  privileges ["ALL PRIVILEGES"]
-  grant_option true
-  action :grant
-end
+# # 'rails'@'localhost'
+# mysql_database_user 'rails' do
+#   connection mysql_connection_info
+#   password ''
+#   host 'localhost'
+#   privileges ["ALL PRIVILEGES"]
+#   grant_option true
+#   action :grant
+# end
+#
+# # 'rails'@'%'
+# mysql_database_user 'rails' do
+#   connection mysql_connection_info
+#   password ''
+#   host '%'
+#   privileges ["ALL PRIVILEGES"]
+#   grant_option true
+#   action :grant
+# end
 
 # PostgreSQL
 template "#{node[:postgresql][:dir]}/pg_hba.conf" do
