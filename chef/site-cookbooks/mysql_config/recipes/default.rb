@@ -2,9 +2,9 @@
 version = '5.5'
 # node['mysql']['server_root_password'] = 'change me'
 
-node.default['mysql'] = {
-    'server_root_password' => 'change me'
-}
+# node.default['mysql'] = {
+#     'server_root_password' => 'change me'
+# }
 
 mysql_service 'default' do
   version version
@@ -27,6 +27,6 @@ mysql_client 'default' do
 end
 
 # install mysql gem
-mysql_chef_gem 'default' do
+mysql2_chef_gem 'default' do
   action :install
 end

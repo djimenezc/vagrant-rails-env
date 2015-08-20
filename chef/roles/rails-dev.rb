@@ -1,6 +1,14 @@
 name 'rails-dev'
 description 'setup for ruby on rails core development'
 
+# override_attributes(
+#     "mysql" => {
+#         "server_root_password" => 'iloverandompasswordsbutthiswilldo',
+#         "server_repl_password" => 'iloverandompasswordsbutthiswilldo',
+#         "server_debian_password" => 'iloverandompasswordsbutthiswilldo'
+#     }
+# )
+
 run_list(
     'recipe[apt]',
     'recipe[git]',

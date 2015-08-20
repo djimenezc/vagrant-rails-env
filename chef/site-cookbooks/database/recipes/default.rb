@@ -7,10 +7,10 @@ instance_name = 'default'
 
 # MySQL
 mysql_connection_info = {
-    :host     => "localhost",
+    :host => "localhost",
     :username => 'root',
-    :password => 'change me',
-    :socket   => "/var/run/mysql-#{instance_name}/mysqld.sock"
+    :password => node['mysql']['server_root_password'],
+    :socket => "/var/run/mysql-#{instance_name}/mysqld.sock"
 }
 
 # 'rails'@'localhost'
@@ -45,13 +45,15 @@ template "#{node[:postgresql][:dir]}/pg_hba.conf" do
 end
 
 postgresql_connection_info = {
-    :host     => 'localhost',
+    :host => 'localhost',
     :password => node['postgresql']['password']['postgres']
 }
 
 postgresql_database_user 'rails' do
   connection postgresql_connection_info
   password ''
-  role_attributes :superuser => true, :createdb => true
+  # role_attributes :superuser => true, :createdb => true
+  privileges [:all]
+  action :grant
   action :create
 end
