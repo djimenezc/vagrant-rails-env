@@ -5,10 +5,6 @@ version = '5.5'
 node.default['mysql'] = {
     'server_root_password' => 'change me'
 }
-mysql_client 'default' do
-  version version
-  action [:create]
-end
 
 mysql_service 'default' do
   version version
@@ -17,9 +13,20 @@ mysql_service 'default' do
   action [:create, :start]
 end
 
-mysql_config 'foo' do
+mysql_config 'default' do
   instance 'default'
   source 'my.conf.erb'
+  # notifies :restart, 'mysql_service[default]'
   version '5.5'
   action :create
+end
+
+mysql_client 'default' do
+  version version
+  action [:create]
+end
+
+# install mysql gem
+mysql_chef_gem 'default' do
+  action :install
 end
